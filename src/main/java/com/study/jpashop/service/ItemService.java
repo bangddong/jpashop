@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.study.jpashop.domain.item.Book;
 import com.study.jpashop.domain.item.Item;
 import com.study.jpashop.repository.ItemRepository;
 
@@ -20,6 +21,14 @@ public class ItemService {
 	@Transactional
 	public void saveItem(Item item) {
 		itemRepository.save(item);
+	}
+
+	@Transactional
+	public void updateItem(Long itemId, String name, int price, int stockQuantity) {
+		Item item = itemRepository.findOne(itemId);
+		item.setName(name);
+		item.setPrice(price);
+		item.setStockQuantity(stockQuantity);
 	}
 
 	public Item findItem(Long itemId) {
